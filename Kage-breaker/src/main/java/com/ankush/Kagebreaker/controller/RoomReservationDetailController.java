@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ankush.Kagebreaker.entities.RoomInfo;
 import com.ankush.Kagebreaker.entities.RoomReservationDetail;
-import com.ankush.Kagebreaker.service.serviceImple.RoomInfoServiceImpl;
 import com.ankush.Kagebreaker.service.serviceImple.RoomReservationDetailServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
