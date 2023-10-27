@@ -46,7 +46,7 @@ public class RoomInfoServiceImpl implements RoomInfoService {
 	@Override
 	public RoomInfo getRoomInfoById(Integer roomInfoId) {
 		// TODO Auto-generated method stub
-		return roomInfoRepo.getById(roomInfoId);
+		return null;//return roomInfoRepo.getById(roomInfoId);
 	}
 
 }

@@ -41,7 +41,7 @@ public class NoteServiceImple implements NoteService {
 	@SuppressWarnings("deprecation")
 	@Override
 	public Note getNoteById(Integer Id) {
-		return noteRepo.getById(Id);
+		return null; //return noteRepo.getById(Id);
 	}
 
 }
