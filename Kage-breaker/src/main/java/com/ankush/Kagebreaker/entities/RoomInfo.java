@@ -28,7 +28,7 @@ public class RoomInfo implements Serializable {
     private Integer capacity;
     
     @Column(name = "is_monitor")
-    private boolean isMonitor;
+    private Boolean isMonitor;
     
     @Column(name = "config_setting")
     private String Configsetting;
@@ -37,8 +37,8 @@ public class RoomInfo implements Serializable {
     private String roomName;
     
     @Column(name = "isEnble")
-    private boolean isEnable;
+    private Boolean isEnable;
     
     @Column(name = "isAvailable")
-    private boolean isAvailable;
+    private Boolean isAvailable;
 }
