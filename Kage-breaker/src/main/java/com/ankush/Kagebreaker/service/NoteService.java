@@ -14,6 +14,6 @@ public interface NoteService {
 
 	List<Note> getAllNoteList();
 	
-	Note deleteNoteById(Integer noteId);
+	void deleteNoteById(Integer noteId);
 
 }

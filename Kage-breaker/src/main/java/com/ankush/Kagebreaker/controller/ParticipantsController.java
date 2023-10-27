@@ -1,13 +1,85 @@
 package com.ankush.Kagebreaker.controller;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ankush.Kagebreaker.entities.Note;
+import com.ankush.Kagebreaker.entities.Participants;
+import com.ankush.Kagebreaker.service.ParticipantsService;
+import com.ankush.Kagebreaker.service.serviceImple.NoteServiceImple;
+import com.ankush.Kagebreaker.service.serviceImple.ParticipantsServiceImple;
+
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSONObject;
 
 @RestController
 @RequestMapping("/api/participants")
 @Slf4j
 public class ParticipantsController {
 
+	@Autowired
+	private ParticipantsServiceImple participantsServiceImple;
+
+	@GetMapping("/getParticipants")
+	public ResponseEntity<?> getParticipantsById(@PathVariable("ParticipantsId") Integer ParticipantsId) {
+		Optional<Participants> participants = null;
+		try {
+			participants = participantsServiceImple.getParticipantsById(ParticipantsId);
+		} catch (Exception e) {
+			log.error("getUserById () method failed to execute", e);
+		}
+		return new ResponseEntity<Participants>(participants.get(), participants == null ? HttpStatus.NOT_FOUND : HttpStatus.ACCEPTED);
+	}
+
+	@PostMapping("/saveParticipants")
+	public ResponseEntity<?> saveParticipants(@RequestBody Participants participants) {
+		Participants createParticipants = null;
+		try {
+			createParticipants = participantsServiceImple.createParticipants(participants);
+		} catch (Exception e) {
+			log.error("saveParticipants() method failed to execute", e);
+		}
+		return new ResponseEntity<Participants>(createParticipants, createParticipants == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED);
+	}
+	
+    @PatchMapping("/updateParticipants")
+    public ResponseEntity<Participants> updateParticipants(@RequestBody Participants participants,@PathVariable("userId") Integer id) {
+    	Participants updateParticipants = null;
+    	try {
+    		updateParticipants =  participantsServiceImple.updateParticipants(participants, id);
+        } catch (Exception e) {
+            log.error("updateParticipants() method failed to execute", e);
+        }
+        return new ResponseEntity<Participants>(updateParticipants, updateParticipants == null ? HttpStatus.BAD_REQUEST : HttpStatus.ACCEPTED);
+    }
+    
+//    @DeleteMapping("/deleteNote")
+//    public ResponseEntity<?> deleteParticipants(@PathVariable("userId") Integer noteId) {
+//        boolean result = false;
+//        JSONObject response = new JSONObject();
+//        try {
+////            result =  participantsServiceImple.deleteNoteById(noteId);
+//            if(result){
+//                response.put("Message","User Deleted Successfully");
+//            }else{
+//                response.put("Message","User Not Deleted ");
+//            }
+//        } catch (Exception e) {
+//            log.error("deleteUser() method failed to execute", e);
+//        }
+//        return new ResponseEntity<JSONObject>(response , HttpStatus.ACCEPTED);
+//    }
+	
+	
 }

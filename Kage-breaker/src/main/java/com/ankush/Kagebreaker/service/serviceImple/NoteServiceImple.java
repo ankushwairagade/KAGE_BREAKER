@@ -20,33 +20,28 @@ public class NoteServiceImple implements NoteService {
 
 	@Override
 	public Note createNote(Note note) {
-		// TODO Auto-generated method stub
 		return noteRepo.save(note);
 	}
 
-
 	@Override
 	public List<Note> getAllNoteList() {
-		// TODO Auto-generated method stub
-		return null;
+		return noteRepo.findAll();
 	}
 
 	@Override
-	public Note deleteNoteById(Integer noteId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteNoteById(Integer noteId) {
+		noteRepo.deleteById(noteId);
 	}
 
 	@Override
 	public Note updateNote(Note note, Integer noteId) {
-		// TODO Auto-generated method stub
-		return null;
+		return noteRepo.save(note);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public Note getNoteById(Integer noteId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Note getNoteById(Integer Id) {
+		return noteRepo.getById(Id);
 	}
 
 }

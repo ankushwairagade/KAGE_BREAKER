@@ -19,9 +19,9 @@ public class RoomInfoServiceImpl implements RoomInfoService {
 	private RoomInfoRepo roomInfoRepo;
 
 	@Override
-	public RoomInfo createRoomInfo(RoomInfo RoomInfo) {
+	public RoomInfo createRoomInfo(RoomInfo roomInfo) {
 		// TODO Auto-generated method stub
-		return null;
+		return roomInfoRepo.save(roomInfo);
 	}
 
 
@@ -29,23 +29,24 @@ public class RoomInfoServiceImpl implements RoomInfoService {
 	@Override
 	public List<RoomInfo> getAllRoomInfoList() {
 		// TODO Auto-generated method stub
-		return null;
+		return roomInfoRepo.findAll();
 	}
 
 
 
 	@Override
-	public RoomInfo updateRoomInfo(RoomInfo RoomInfo, Integer id) {
+	public RoomInfo updateRoomInfo(RoomInfo roomInfo, Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return roomInfoRepo.save(roomInfo);
 	}
 
 
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public RoomInfo getRoomInfoById(Integer RoomInfoId) {
+	public RoomInfo getRoomInfoById(Integer roomInfoId) {
 		// TODO Auto-generated method stub
-		return null;
+		return roomInfoRepo.getById(roomInfoId);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.ankush.Kagebreaker.service.serviceImple;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,46 +21,27 @@ public class ParticipantsServiceImple implements ParticipantsService {
 
 	@Override
 	public Participants createParticipants(Participants participants) {
-		// TODO Auto-generated method stub
 		return participantsRepo.save(participants);
 	}
 
-
 	@Override
 	public List<Participants> getAllParticipantsList() {
-		// TODO Auto-generated method stub
-return participantsRepo.findAll();
+		return participantsRepo.findAll();
 	}
-
-//	@Override
-//	public Participants deleteParticipantsById(Integer id) {
-//		// TODO Auto-generated method stub
-//		Participants participants = participantsRepo.getById(Id);
-//		
-//		return participantsRepo.deleteById(id);
-//	}
-
-
 
 	@Override
 	public Participants updateParticipants(Participants participants, Integer Id) {
-		// TODO Auto-generated method stub
-		return null;
+		return participantsRepo.save(participants);
 	}
 
-
-
 	@Override
-	public Participants getParticipantsById(Integer noteId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Participants> getParticipantsById(Integer id) {
+		return participantsRepo.findById(id);
 	}
 
-
-
 	@Override
-	public Participants deleteParticipantsById(Integer noteId) {
-		// TODO Auto-generated method stub
+	public Participants deleteParticipantsById(Integer Id) {
+		participantsRepo.deleteById(Id);
 		return null;
 	}
 
