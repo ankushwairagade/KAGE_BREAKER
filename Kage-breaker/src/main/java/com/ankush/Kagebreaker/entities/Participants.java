@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "room_reservation_detail")
+@Table(name = "participants")
 @Entity
 public class Participants implements Serializable {
     

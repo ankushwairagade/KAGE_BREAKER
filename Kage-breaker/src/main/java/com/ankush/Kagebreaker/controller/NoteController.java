@@ -26,7 +26,7 @@ public class NoteController {
 	@Autowired
 	private NoteServiceImple noteService;
 
-	@GetMapping("/getNote")
+	@GetMapping("/getNote/{noteId}")
 	public ResponseEntity<?> getNoteById(@PathVariable("noteId") Integer noteId) {
 		Note note = null;
 		try {
@@ -48,8 +48,8 @@ public class NoteController {
 		return new ResponseEntity<Note>(createNote, createNote == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED);
 	}
 	
-    @PatchMapping("/updateNote")
-    public ResponseEntity<Note> updateNote(@RequestBody Note note,@PathVariable("userId") Integer noteId) {
+    @PatchMapping("/updateNote/{noteId}")
+    public ResponseEntity<Note> updateNote(@RequestBody Note note,@PathVariable("noteId") Integer noteId) {
     	Note updateNote = null;
     	try {
     		updateNote =  noteService.updateNote(note, noteId);
@@ -59,7 +59,7 @@ public class NoteController {
         return new ResponseEntity<Note>(updateNote, updateNote == null ? HttpStatus.BAD_REQUEST : HttpStatus.ACCEPTED);
     }
     
-    @DeleteMapping("/deleteNote")
+    @DeleteMapping("/deleteNote/{noteId}")
     public ResponseEntity<?> deleteNote(@PathVariable("userId") Integer noteId) {
         boolean result = false;
         JSONObject response = new JSONObject();

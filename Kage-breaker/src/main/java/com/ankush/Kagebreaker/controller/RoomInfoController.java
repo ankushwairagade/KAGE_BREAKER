@@ -7,9 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ankush.Kagebreaker.entities.Note;
 import com.ankush.Kagebreaker.entities.RoomInfo;
 import com.ankush.Kagebreaker.service.serviceImple.RoomInfoServiceImpl;
 
@@ -23,7 +26,21 @@ public class RoomInfoController {
 	@Autowired
 	private RoomInfoServiceImpl roomInfoServiceImpl;
 
-	@GetMapping("/getRoomInfo")
+	
+
+	@PostMapping("/saveRoomInfo")
+	public ResponseEntity<?> saveRoomInfo(@RequestBody RoomInfo roomInfo) {
+		RoomInfo createRoomInfo = null;
+		try {
+			createRoomInfo = roomInfoServiceImpl.createRoomInfo(createRoomInfo);
+		} catch (Exception e) {
+			log.error("saveUser() method failed to execute", e);
+		}
+		return new ResponseEntity<RoomInfo>(createRoomInfo, createRoomInfo == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED);
+	}
+
+	
+	@GetMapping("/getRoomInfo/{roomId}")
 	public ResponseEntity<?> getUserById(@PathVariable("roomId") Integer roomId) {
 		RoomInfo roomInfo = null;
 		try {

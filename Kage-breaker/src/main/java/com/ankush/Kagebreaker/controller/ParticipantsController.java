@@ -26,13 +26,13 @@ public class ParticipantsController {
 	@Autowired
 	private ParticipantsServiceImple participantsServiceImple;
 
-	@GetMapping("/getParticipants")
-	public ResponseEntity<?> getParticipantsById(@PathVariable("ParticipantsId") Integer ParticipantsId) {
+	@GetMapping("/getParticipants/{participantsId}")
+	public ResponseEntity<?> getParticipantsById(@PathVariable("participantsId") Integer participantsId) {
 		Optional<Participants> participants = null;
 		try {
-			participants = participantsServiceImple.getParticipantsById(ParticipantsId);
+			participants = participantsServiceImple.getParticipantsById(participantsId);
 		} catch (Exception e) {
-			log.error("getUserById () method failed to execute", e);
+			log.error("getParticipantsById () method failed to execute", e);
 		}
 		return new ResponseEntity<Participants>(participants.get(), participants == null ? HttpStatus.NOT_FOUND : HttpStatus.ACCEPTED);
 	}
@@ -48,11 +48,11 @@ public class ParticipantsController {
 		return new ResponseEntity<Participants>(createParticipants, createParticipants == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED);
 	}
 	
-    @PatchMapping("/updateParticipants")
-    public ResponseEntity<Participants> updateParticipants(@RequestBody Participants participants,@PathVariable("userId") Integer id) {
+    @PatchMapping("/updateParticipants/{participantsId}")
+    public ResponseEntity<Participants> updateParticipants(@RequestBody Participants participants,@PathVariable("participantsId") Integer participantsId) {
     	Participants updateParticipants = null;
     	try {
-    		updateParticipants =  participantsServiceImple.updateParticipants(participants, id);
+    		updateParticipants =  participantsServiceImple.updateParticipants(participants, participantsId);
         } catch (Exception e) {
             log.error("updateParticipants() method failed to execute", e);
         }
