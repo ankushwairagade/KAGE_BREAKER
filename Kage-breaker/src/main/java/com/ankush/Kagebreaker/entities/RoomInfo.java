@@ -38,6 +38,9 @@ public class RoomInfo implements Serializable {
     @Column(name = "room_name")
     private String roomName;
     
+    @Column(name = "organizer_name")
+    private String organizerName;
+    
     @Column(name = "isEnble")
     private Boolean isEnable;
     

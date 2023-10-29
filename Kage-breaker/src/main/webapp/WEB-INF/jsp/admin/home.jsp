@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@page import="com.ankush.Kagebreaker.entities.RoomInfo"%>
+<%@page import="com.ankush.Kagebreaker.entities.RoomReservationDetail"%>
 <%@page import="java.util.List"%>
 <html lang="en">
   <head>
@@ -106,48 +107,7 @@
 		    padding-top: 10px;
 		    padding-bottom: 10px
 		}
-		.mt-element-step .step-thin .mt-step-number {
-		    font-size: 26px;
-		    border-radius: 50%!important;
-		    float: left;
-		    margin: auto;
-		    padding: 3px 14px
-		}
-		.mt-element-step .step-thin .mt-step-title {
-		    font-size: 24px;
-		    padding-left: 60px;
-		    margin-top: -4px;
-		    font-variant:small-caps;
-		    font-weight: 600;
-		}
-		.mt-element-step .step-thin .mt-step-content {
-		    padding-left: 60px;
-		    margin-top: -5px;
-		    font-variant: small-caps;
-   			font-weight: 700;
-		}
-		.mt-element-step .step-thin .active {
-		    background-color: #32c5d2!important
-		}
-		
-		.mt-element-step .step-thin .active .mt-step-number {
-		    color: #32c5d2!important
-		}
-		.mt-element-step .step-thin .active .mt-step-content,.mt-element-step .step-thin .active .mt-step-title {
-		    color: #fff!important
-		}
-		.mt-element-step .step-thin .done {
-		    background-color: #26C281!important
-		}
-		.mt-element-step .step-thin .done .mt-step-number {
-		    color: #26C281!important
-		}
-		.mt-element-step .step-thin .done .mt-step-content,.mt-element-step .step-thin .done .mt-step-title {
-		    color: #fff!important
-		}
-		.bootstrap-switch,.bootstrap-switch-container,.bootstrap-switch-handle-on,.bootstrap-switch-handle-off{
-			border-radius:0px !important;
-		}
+
 		.select2-container-multi .select2-choices {
 		    border-radius: 0px !important;
 		}
@@ -188,8 +148,8 @@
       justify-content: space-between;
     }
     .grid-item {
-      width: calc(33.33% - 10px); /* 33.33% for 3 items, minus some spacing */
-      margin: 5px; /* Add some spacing between items */
+      width: calc(33.33% - 20px); /* 33.33% for 3 items, minus some spacing */
+      margin: 10px; /* Add some spacing between items */
       background-color: #f0f0f0;
       padding: 10px;
       text-align: center;
@@ -200,49 +160,66 @@
   padding: 10px; /* Custom padding */
   /* Add any other custom styles here */
 }
+    .col-md-4 {
+  width: 33.33%; /* Custom width for medium-sized screens */
+  background-color: #f0f0f0; /* Custom background color */
+  padding: 10px; /* Custom padding */
+  /* Add any other custom styles here */
+}
 
 .col-md-12 {
   background-color: #f0f0f0; /* Custom background color */
   padding: 10px; /* Custom padding */
   /* Add any other custom styles here */
 }
+.circle {
+      width: 100px; /* Set the width and height to be the same for a perfect circle */
+      height: 100px;
+      background-color: #3498db; /* Add a background color to make it visible */
+      border-radius: 50%; /* Set border-radius to 50% for a circle */
+    }
+    
+    .rounded-rectangle {
+      height: 100px;
+      margin: 20px;
+      border-radius: 10%; /* Adjust this value for roundness */
+    }
+    .light-green {
+  background-color: #00ff00; /* Hex code for light green */
+  /* You can customize other styles as needed */
+}
+.red-color {
+  background-color: #ff0000; /* Hex code for red */
+  /* You can customize other styles as needed */
+}
 	</style>
   </head>
 	
   <body >
-<h1class="text-center">Conference Room Management System</h1>
-        
+  <div class="col-md-12">
+	<h1 class="text-center escalation-title">KAP-CRMS</h1>
+ </div>
             <%
             List<RoomInfo> roomList = request.getAttribute("ROOM_LIST")!=null?(List<RoomInfo>)request.getAttribute("ROOM_LIST"):null; 
+            List<RoomReservationDetail> roomReservationDetailList = request.getAttribute("ROOM_RESERVATION_INFO")!=null?(List<RoomReservationDetail>)request.getAttribute("ROOM_RESERVATION_INFO"):null; 
             %>
-          	
-                		<div class="row col-md-12">
-                  			<h1 class="escalation-title  text-center">All Room in your organization</small></h1>
+                		<div class="row col-md-12 x_content">
+                  			<h3 class="escalation-title  text-center">All Rooms in your organization</small></h3>
+               			</div>
+               			<div class="conference-reservation-div grid">
+               	       <button type="button" class="btn  col-md-4" >Reserve Room</button>
+               	       <button type="button" class="btn  col-md-4" >Seach Person</button>
+               	       <button type="button" class="btn  col-md-4" >Search Meeting</button>
+               			
                			</div>
                			<div class="grid">
-	                  		<%if(roomList != null && !roomList.isEmpty()){%>
-					        <%for (RoomInfo roomInfo : roomList) {%>
-					        	 <div class="grid-item">
-					        	 	<button type="button" class="btn btn-primary" style="width: 100%;" onclick="reLoadResource('<%=roomInfo.getRoomName()%>')"><%=roomInfo.getRoomName()%></button>
+	                  		<%if(roomReservationDetailList != null && !roomReservationDetailList.isEmpty()){%>
+					        <%for (RoomReservationDetail roomInfo : roomReservationDetailList) {%>
+					        	 <div class="col-md-3 rounded-rectangle <%=roomInfo.getOrganizerName() != null && !"".equals(roomInfo.getOrganizerName()) ? "red-color" : "light-green"%>" title="<%=roomInfo.getOrganizerName() != null && !"".equals(roomInfo.getOrganizerName()) ? "Organizer : "+roomInfo.getOrganizerName() : "Available Now"%>">
+					        	 	<button type="button" class="btn btn-primary" style="width: 100%;" onclick="reLoadResource('<%=roomInfo.getRoomName()%>')"><%=roomInfo.getRoomName() != null && !"".equals(roomInfo.getRoomName()) ? roomInfo.getRoomName() : "Available"%></button>
 					        	 </div>
 					        <%} }%>
 					       </div>  
-        	
-        	
-        	
- <div class="grid">
-    <div class="grid-item">Item 1</div>
-    <div class="grid-item">Item 2</div>
-    <div class="grid-item">Item 3</div>
-    <div class="grid-item">Item 4</div>
-    <div class="grid-item">Item 5</div>
-    <div class="grid-item">Item 6</div>
-    <div class="grid-item">Item 7</div>
-    <div class="grid-item">Item 8</div>
-    <div class="grid-item">Item 9</div>
-  </div>
-        	
-        	
         <form id="frmSubmit" action="system-cache-init" method="post">
            	<input type="hidden" name="resource_key" id="resource_key" />
         </form>

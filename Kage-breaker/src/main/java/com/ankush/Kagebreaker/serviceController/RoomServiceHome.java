@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ankush.Kagebreaker.entities.RoomInfo;
-import com.ankush.Kagebreaker.service.serviceImple.RoomInfoServiceImpl;
+import com.ankush.Kagebreaker.entities.RoomReservationDetail;
+import com.ankush.Kagebreaker.service.RoomInfoService;
+import com.ankush.Kagebreaker.service.RoomReservationDetailsService;
 
 @Controller
 @RequestMapping("admin")
 public class RoomServiceHome {
 
 	@Autowired
-	RoomInfoServiceImpl roomInfoServiceimpl;
+	RoomReservationDetailsService roomReservationDetailsService;
+	@Autowired
+	RoomInfoService roomInfoService;
 	
 	@RequestMapping(value = "/")
 	public ModelAndView defaultPage(HttpServletRequest request, HttpServletResponse response) {
@@ -27,7 +31,9 @@ public class RoomServiceHome {
 	
 	@RequestMapping(value = "home")
 	public ModelAndView homePage(HttpServletRequest request, HttpServletResponse response) {
-		List<RoomInfo> roomInfoList = roomInfoServiceimpl.getAllRoomInfoList();
+		List<RoomReservationDetail> roomReservationInfo = roomReservationDetailsService.getAllRoomReservationDetailList();
+		List<RoomInfo> roomInfoList = roomInfoService.getAllRoomInfoList();
+		request.setAttribute("ROOM_RESERVATION_INFO", roomReservationInfo);
 		request.setAttribute("ROOM_LIST", roomInfoList);
 		ModelAndView model = new ModelAndView();
 		model.setViewName("admin/home");

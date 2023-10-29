@@ -42,6 +42,9 @@ public class RoomReservationDetail implements Serializable {
     @Column(name = "organizer_name")
     private String organizerName;
     
+    @Column(name = "room_name")
+    private String roomName;
+    
     @Column(name = "findings")
     private String findings;
     
@@ -52,7 +55,7 @@ public class RoomReservationDetail implements Serializable {
     private String relatedDepartment;
 
     @Column(name = "total_duration")
-    private long totalDuration;
+    private Long totalDuration;
     
     
 }
